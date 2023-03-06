@@ -1,0 +1,16 @@
+import { fetch } from 'wix-fetch';
+
+
+export function preformFetch(url, options) {
+    console.log(`Send request to URL: ${url}`);
+    return fetch(url, options)
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+            console.log(response);
+            // return Promise.reject(`Fetch did not succeed error code: ${JSON.stringify(response.status)}`);
+            return Promise.reject(`Fetch did not succeed error code: ${JSON.stringify(response)}`);
+            // return Promise.reject(response);
+        })
+}
