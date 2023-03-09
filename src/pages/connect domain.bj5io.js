@@ -28,11 +28,15 @@ $w("#connectButton").onClick(async (event) => {
 	try {
 		$w('#connectButton').disable()
 		let connectionresponse = await connectDomain(body, pernatAccountId, accountId, siteId)
-        $w('#responseText').text = connectionresponse.text;
+        $w('#responseText').text = JSON.stringify(connectionresponse)
         $w('#responseText').show()
 		console.log(JSON.stringify(connectionresponse))
 	}  catch (error) {
-		console.log(error)
+        $w('#responseText').text = `Connect Domain ${error}`
+        $w('#responseText').show()
 	}
 	$w('#connectButton').enable()
 })
+
+function displayConnectionDitalis() {
+}

@@ -8,8 +8,8 @@ export function preformFetch(url, options) {
             if (response.ok) {
                 return response.json();
             }
-            console.log(JSON.stringify(response))
-            return Promise.reject(`Fetch did not succeed error code: ${JSON.stringify(response.status)}`);
+            console.log(response)
+            return Promise.reject(`Request did not succeed error code: ${JSON.stringify(response.status)} and ${JSON.stringify(response.headers._headers)}`);
 
         })
 }
