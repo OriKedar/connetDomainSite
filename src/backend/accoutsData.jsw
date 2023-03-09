@@ -1,0 +1,10 @@
+import { getSecret } from 'wix-secrets-backend'
+import { preformFetch } from './featchModule.jsw'
+
+export async function getSubAccounts(pernatAccountId) {
+
+}
+
+export async function getSitesByAccount(accountId) {
+
+}

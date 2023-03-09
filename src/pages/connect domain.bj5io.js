@@ -1,6 +1,7 @@
 import { connectDomain } from 'backend/connectDomain'
 
 $w.onReady(function () {
+    $w('#responseText').hide()
     console.log("this is the onready function")
 });
 
@@ -9,7 +10,8 @@ $w("#connectButton").onClick(async (event) => {
 	console.log("clicked connect button")
 	let domainName = $w('#domainName').value
 	let connectionType = $w('#connectionTypeDrop').value
-	let accountId = $w('#accountDrop').value
+	let pernatAccountId = $w('#perntAccountDrop').value
+    let accountId = $w('#accountId').value
     let siteId = $w('#msidInput').value
 	// let siteId = wixLocation.query.wixSiteId;
 
@@ -17,15 +19,18 @@ $w("#connectButton").onClick(async (event) => {
     
     let body = {domainConnection:
         {
-            domain: domainName,
-            connection_type: connectionType
+            domain: `${domainName}`,
+            // connection_type: `${connectionType}`,
+            assign_as: "PRIMARY"
         }
     }
 
 	try {
 		$w('#connectButton').disable()
-		let connectionresponse = await connectDomain(body, accountId, siteId)
-		console.log(connectionresponse)
+		let connectionresponse = await connectDomain(body, pernatAccountId, accountId, siteId)
+        $w('#responseText').text = connectionresponse.text;
+        $w('#responseText').show()
+		console.log(JSON.stringify(connectionresponse))
 	}  catch (error) {
 		console.log(error)
 	}
