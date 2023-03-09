@@ -1,0 +1,27 @@
+import { getSecret } from 'wix-secrets-backend'
+import { preformFetch } from './featchModule.jsw'
+
+
+export async function connectDomain(body, pernatAccountId, accountId, siteId){
+    let keyByAccount = await getSecret(`CD-${pernatAccountId}`)
+    
+    const url = 'https://www.wixapis.com/domain-connect/v1/connect-domain'
+    const options = {
+        "method": "post",
+        "headers": {
+            "Authorization": keyByAccount,
+            "wix-account-id": accountId,
+            "wix-site-id": siteId,
+            "Content-Type": "application/json",
+            "Accept": "*/*"
+        },
+        "body": JSON.stringify(body)
+    }
+    
+    try {
+        return preformFetch(url, options)
+    } catch(error) {
+        console.log(`error ${JSON.stringify(response.headers.status)}, meassage: ${JSON.stringify(response.body.massage)}`)
+    }
+    // return preformFetch(url, options)
+};
